@@ -57,11 +57,18 @@ function isPacketNewer(packet,current){
 
 async function syncPublishedUpdate(){
   try{
-    const response=await fetch(`actualizacion.json?ts=${Date.now()}`,{cache:'no-store'});
-    if(!response.ok)return;
-    const packet=await response.json();validatePacket(packet);
-    if(packet.snapshotId===control.snapshotId||!isPacketNewer(packet,control))return;
-    control={records:packet.records,snapshotId:packet.snapshotId,sequence:Number(packet.sequence),importedAt:new Date().toISOString(),createdAt:packet.createdAt||null,source:'publicado'};
+    const listUrl=`https://api.github.com/repos/BrayAguilar/CMT-Almacen/contents/actualizaciones?ref=main&ts=${Date.now()}`;
+    const listing=await fetch(listUrl,{headers:{Accept:'application/vnd.github+json'},cache:'no-store'});
+    if(!listing.ok)return;
+    const files=await listing.json();if(!Array.isArray(files))return;
+    const candidates=files.filter(x=>x.type==='file'&&x.name.toLowerCase().endsWith('.json')&&x.download_url);
+    let latest=null;
+    for(const file of candidates){
+      try{const response=await fetch(file.download_url,{cache:'no-store'});if(!response.ok)continue;const packet=await response.json();validatePacket(packet);if(!latest||isPacketNewer(packet,latest))latest=packet;}
+      catch(error){console.warn(`Se omitió ${file.name}:`,error);}
+    }
+    if(!latest||latest.snapshotId===control.snapshotId||!isPacketNewer(latest,control))return;
+    control={records:latest.records,snapshotId:latest.snapshotId,sequence:Number(latest.sequence),importedAt:new Date().toISOString(),createdAt:latest.createdAt||null,source:'publicado'};
     await C.write('commander',control);
   }catch(error){console.warn('No se pudo sincronizar la actualización publicada:',error);}
 }
