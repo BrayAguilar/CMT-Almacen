@@ -2,7 +2,6 @@ const C=window.AppCommon,$=s=>document.querySelector(s);
 let baseline,control;
 
 async function init(){
-  C.bindBackupButton('comandante','commander');
   baseline=C.fresh();
   control=await C.read('commander')||{records:[],snapshotId:null,sequence:0,importedAt:null};
   control.records=control.records||[];
