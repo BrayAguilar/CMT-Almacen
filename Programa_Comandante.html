@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Programa Comandante | Almacén</title>
+  <link rel="stylesheet" href="app.css">
+  <script src="datos-iniciales.js"></script>
+  <script>window.APP_DB_NAME="almacen-comandante-v1";</script><script src="comun.js"></script>
+  <script defer src="comandante.js"></script>
+</head>
+<body>
+  <header>
+    <div><h1>Consulta para el Comandante</h1><p>Vista sencilla del almacén: control, inventario y consumo</p></div>
+    <div class="actions">
+      <label class="btn primary" for="updateFile">Cargar actualización</label>
+      <input id="updateFile" class="hidden" type="file" accept=".json,application/json"><button class="btn" id="backupButton" type="button" title="Elige la carpeta donde guardaste los programas; se creará la subcarpeta respaldo. Si el navegador no permite guardarla allí, coloca la descarga en respaldo.">Guardar respaldo diario</button>
+      <a class="btn" href="index.html">Inicio</a>
+    </div>
+  </header>
+  <main>
+    <nav class="tabs" aria-label="Secciones">
+      <button class="active" data-tab="control">Control</button>
+      <button data-tab="inventario">Inventario</button>
+      <button data-tab="estadisticas">Estadísticas</button>
+    </nav>
+
+    <section id="control" class="panel active">
+      <div id="updateStatus" class="notice"></div>
+      <div class="cards">
+        <div class="card"><small>Disponible para entregar</small><strong id="available">0</strong></div>
+        <div class="card"><small>Existencia física</small><strong id="physical">0</strong></div>
+        <div class="card"><small>Salidas pendientes, reservadas</small><strong id="pendingOut">0</strong></div>
+        <div class="card"><small>Entradas pendientes de recibir</small><strong id="pendingIn">0</strong></div>
+        <div class="card"><small>Consumibles en nivel bajo</small><strong id="lowCount">0</strong></div>
+        <div class="card"><small>Consumibles entregados acumulados</small><strong id="delivered">0</strong></div>
+      </div>
+      <div class="box"><h2>Movimientos recientes</h2><p class="muted">Se muestran las entradas recibidas y las salidas ya entregadas.</p><div id="latest"></div></div>
+    </section>
+
+    <section id="inventario" class="panel">
+      <div class="toolbar"><input id="invSearch" type="search" placeholder="Escribe código, modelo o consumible para buscar"></div>
+      <p class="notice">El disponible es lo que se puede entregar ahora. Las salidas pendientes ya están apartadas.</p>
+      <div id="inventoryTable"></div>
+    </section>
+
+    <section id="estadisticas" class="panel">
+      <div class="box">
+        <h2>Consumo y entradas</h2>
+        <p class="muted">El consumo cuenta las salidas confirmadas como recibidas.</p>
+        <div class="toolbar">
+          <label>Ver por <select id="groupBy"><option value="day">Día</option><option value="week">Semana</option><option value="month" selected>Mes</option></select></label>
+          <label>Período <select id="range"><option value="all">Todo el historial</option><option value="365">Últimos 12 meses</option><option value="90">Últimos 90 días</option><option value="30">Últimos 30 días</option></select></label>
+          <label>Unidad <select id="unitFilter"><option value="">Todas</option></select></label>
+          <label>Consumible <select id="productFilter"><option value="">Todos</option></select></label>
+        </div>
+        <div id="statsSummary"></div>
+        <div id="statsChart"></div>
+      </div>
+      <div class="stat-grid">
+        <div class="box"><h2>Consumo por unidad</h2><div id="byUnit"></div></div>
+        <div class="box"><h2>Consumo por consumible</h2><div id="byProduct"></div></div>
+      </div>
+    </section>
+  </main>
+  <footer>Consulta de solo lectura. Para actualizarla, carga el archivo JSON más reciente que envía el área de entrega.</footer>
+</body>
+</html>
+
