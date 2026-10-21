@@ -20,7 +20,6 @@ async function init(){
   $('#groupBy').onchange=renderStats;$('#range').onchange=renderStats;
   $('#unitFilter').onchange=renderStats;$('#productFilter').onchange=renderStats;
   $('#invSearch').oninput=renderInventory;
-  $('#updateFile').onchange=importUpdate;
   render();
 }
 
@@ -35,18 +34,6 @@ function validatePacket(p){
     if(x.tipo==='Salida'&&!['Pendiente','Recibido'].includes(x.estado))throw Error('Una salida tiene un estado no reconocido.');
     if(x.tipo==='Entrada'&&!['Pendiente','Entregada'].includes(x.estado))throw Error('Una entrada tiene un estado no reconocido.');
   }
-}
-
-async function importUpdate(e){
-  const file=e.target.files?.[0];if(!file)return;
-  try{
-    const packet=JSON.parse(await file.text());validatePacket(packet);
-    if(packet.snapshotId===control.snapshotId){alert('Esta actualización ya está cargada.');return;}
-    if(!isPacketNewer(packet,control)){alert('Este archivo es anterior o igual a la actualización que ya está cargada.');return;}
-    control={records:packet.records,snapshotId:packet.snapshotId,sequence:Number(packet.sequence),importedAt:new Date().toISOString(),createdAt:packet.createdAt||null,source:'archivo'};
-    await C.write('commander',control);render();alert('La información se actualizó correctamente.');
-  }catch(err){alert('No se pudo cargar el archivo: '+err.message);}
-  finally{e.target.value='';}
 }
 
 function isPacketNewer(packet,current){
@@ -87,7 +74,7 @@ function render(){
   $('#lowCount').textContent=C.fmt(low.length);$('#delivered').textContent=C.fmt(delivered);
   $('#updateStatus').innerHTML=control.importedAt
     ?`${control.source==='publicado'?'Información sincronizada desde GitHub':'Información actualizada'} el <b>${C.esc(new Date(control.importedAt).toLocaleString('es-MX'))}</b>. Archivo número ${C.fmt(control.sequence)}.`
-    :'<b>Aún no se ha cargado información.</b> Pulsa “Cargar actualización” y selecciona el archivo JSON más reciente que te envió el área de entrega.';
+    :'<b>Esperando la primera actualización.</b> Los movimientos se sincronizan automáticamente desde el repositorio al abrir esta aplicación.';
   const recent=events().filter(x=>(x.tipo==='Entrada'&&x.estado==='Entregada')||(x.tipo==='Salida'&&x.estado==='Recibido')).sort((a,b)=>C.eventDate(b).localeCompare(C.eventDate(a))).slice(0,10);
   $('#latest').innerHTML=recent.length?C.table(['Fecha','Folio','Movimiento','Unidad / proveedor','Consumible','Cantidad'],recent.map(x=>[
     C.esc(C.eventDate(x)),C.esc(x.folio),x.tipo==='Entrada'?'Entrada recibida':'Salida entregada',C.esc(x.organismo),C.esc(baseline.catalog.find(p=>p.codigo===x.codigo)?.modelo||x.codigo),C.fmt(x.cantidad)

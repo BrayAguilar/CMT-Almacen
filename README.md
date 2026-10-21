@@ -1,6 +1,6 @@
 # Comandante — control de almacén
 
-Aplicación estática para consultar inventario y estadísticas. Al abrirla, consulta los archivos JSON de `actualizaciones/` y carga el paquete válido con fecha de generación más reciente. El botón **Cargar actualización** sigue disponible para importar un archivo manualmente.
+Aplicación estática para consultar inventario y estadísticas. Al abrirla, consulta en segundo plano los archivos JSON de `actualizaciones/` y carga el paquete válido con fecha de generación más reciente. El Comandante no necesita seleccionar ni cargar archivos.
 
 ## Publicar una actualización de movimientos
 
