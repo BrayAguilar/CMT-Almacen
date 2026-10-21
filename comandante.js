@@ -12,6 +12,7 @@ async function init(){
     if(['Entregada','Recibido'].includes(x.estado)&&!x.fechaCierre)x.fechaCierre=x.fechaEntrega||x.fecha;
   }
   await C.write('commander',control);
+  await syncPublishedUpdate();
   document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{
     document.querySelectorAll('.tabs button,.panel').forEach(x=>x.classList.remove('active'));
     b.classList.add('active');$('#'+b.dataset.tab).classList.add('active');
@@ -41,11 +42,28 @@ async function importUpdate(e){
   try{
     const packet=JSON.parse(await file.text());validatePacket(packet);
     if(packet.snapshotId===control.snapshotId){alert('Esta actualización ya está cargada.');return;}
-    if(Number(packet.sequence)<=Number(control.sequence||0)){alert('Este archivo es anterior al que ya está cargado.');return;}
-    control={records:packet.records,snapshotId:packet.snapshotId,sequence:Number(packet.sequence),importedAt:new Date().toISOString(),createdAt:packet.createdAt||null};
+    if(!isPacketNewer(packet,control)){alert('Este archivo es anterior o igual a la actualización que ya está cargada.');return;}
+    control={records:packet.records,snapshotId:packet.snapshotId,sequence:Number(packet.sequence),importedAt:new Date().toISOString(),createdAt:packet.createdAt||null,source:'archivo'};
     await C.write('commander',control);render();alert('La información se actualizó correctamente.');
   }catch(err){alert('No se pudo cargar el archivo: '+err.message);}
   finally{e.target.value='';}
+}
+
+function isPacketNewer(packet,current){
+  const incomingTime=Date.parse(packet.createdAt||''),currentTime=Date.parse(current.createdAt||'');
+  if(Number.isFinite(incomingTime)&&Number.isFinite(currentTime))return incomingTime>currentTime||(incomingTime===currentTime&&Number(packet.sequence)>Number(current.sequence||0));
+  return Number(packet.sequence)>Number(current.sequence||0);
+}
+
+async function syncPublishedUpdate(){
+  try{
+    const response=await fetch(`actualizacion.json?ts=${Date.now()}`,{cache:'no-store'});
+    if(!response.ok)return;
+    const packet=await response.json();validatePacket(packet);
+    if(packet.snapshotId===control.snapshotId||!isPacketNewer(packet,control))return;
+    control={records:packet.records,snapshotId:packet.snapshotId,sequence:Number(packet.sequence),importedAt:new Date().toISOString(),createdAt:packet.createdAt||null,source:'publicado'};
+    await C.write('commander',control);
+  }catch(error){console.warn('No se pudo sincronizar la actualización publicada:',error);}
 }
 
 function events(){return control.records||[];}
@@ -61,7 +79,7 @@ function render(){
   $('#pendingOut').textContent=C.fmt(pendingOut);$('#pendingIn').textContent=C.fmt(pendingIn);
   $('#lowCount').textContent=C.fmt(low.length);$('#delivered').textContent=C.fmt(delivered);
   $('#updateStatus').innerHTML=control.importedAt
-    ?`Información actualizada el <b>${C.esc(new Date(control.importedAt).toLocaleString('es-MX'))}</b>. Archivo número ${C.fmt(control.sequence)}.`
+    ?`${control.source==='publicado'?'Información sincronizada desde GitHub':'Información actualizada'} el <b>${C.esc(new Date(control.importedAt).toLocaleString('es-MX'))}</b>. Archivo número ${C.fmt(control.sequence)}.`
     :'<b>Aún no se ha cargado información.</b> Pulsa “Cargar actualización” y selecciona el archivo JSON más reciente que te envió el área de entrega.';
   const recent=events().filter(x=>(x.tipo==='Entrada'&&x.estado==='Entregada')||(x.tipo==='Salida'&&x.estado==='Recibido')).sort((a,b)=>C.eventDate(b).localeCompare(C.eventDate(a))).slice(0,10);
   $('#latest').innerHTML=recent.length?C.table(['Fecha','Folio','Movimiento','Unidad / proveedor','Consumible','Cantidad'],recent.map(x=>[

@@ -1,13 +1,26 @@
 # Comandante — control de almacén
 
-Aplicación estática independiente para consultar inventario y estadísticas e importar el archivo de actualización generado por el programa de Entrega.
+Aplicación estática para consultar inventario y estadísticas. Al abrirla, busca `actualizacion.json` en la raíz del sitio y carga la versión más reciente. También conserva la opción **Cargar actualización** para importar un archivo manualmente.
 
-## Publicar
+## Publicar una actualización de movimientos
 
-Sube el contenido de esta carpeta a un repositorio Git de tu propiedad y configura el alojamiento estático del proveedor para servir `index.html` desde la raíz. No requiere compilación ni servidor de aplicaciones.
+1. Genera el archivo JSON desde el programa de Entrega.
+2. Coloca una copia en esta carpeta con el nombre `actualizacion.json`, reemplazando el anterior.
+3. Confirma que la actualización se puede divulgar: el repositorio y el sitio son públicos, así que cualquier persona puede descargar este archivo y leer los folios, unidades, fechas, consumibles y observaciones que contenga.
+4. Publica el archivo con Git:
+
+   ```powershell
+   git add actualizacion.json
+   git commit -m "Actualiza movimientos del almacén"
+   git push
+   ```
+
+5. Abre o recarga Comandante. El sitio toma la actualización publicada de GitHub.
+
+Cada equipo que abra la aplicación verá la actualización central publicada al cargar la página. No se guardan cambios en Git desde el navegador. La información activa en la app sigue almacenada localmente en cada navegador.
 
 ## Datos y privacidad
 
-La aplicación guarda sus datos en el almacenamiento local del navegador y permite importar archivos `Actualizacion_Almacen_*.json`. Publicar el sitio no publica ni sincroniza esos registros. Cada computadora/navegador debe importar el archivo de actualización que corresponda. No agregues respaldos ni archivos de movimientos al repositorio: pueden incluir datos de las entregas.
+No agregues respaldos diarios ni archivos de movimientos con otro nombre al repositorio. Publica únicamente el archivo de actualización autorizado. El catálogo inicial está en `datos-iniciales.js` y también es público.
 
-El catálogo inicial se incluye en `datos-iniciales.js`. Los archivos de movimientos no se incluyen en esta publicación.
+La aplicación no requiere compilación ni servidor de aplicaciones.
