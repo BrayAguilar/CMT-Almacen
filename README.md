@@ -5,7 +5,7 @@ Aplicación estática para consultar inventario y estadísticas. Al abrirse, bus
 ## Flujo de actualización
 
 1. En Administración, pulsa **Crear archivo para Comandante** y elige el JSON actual de `Aplicacion_Administrador/Actualizaciones_Entrega/`.
-2. Selecciona la carpeta `Aplicacion_Administrador` cuando se solicite. Administración guardará el resumen en `Aplicacion_Administrador/Actualizacione_Comandante/Resumen_Comandante_*.json`.
+2. Selecciona la carpeta `Aplicacion_Administrador` cuando se solicite. Administración guardará el resumen en `Aplicacion_Administrador/Actualizaciones_Comandante/Resumen_Comandante_*.json`.
 3. Para publicar la actualización, copia únicamente el paquete depurado a esta carpeta `datos_comandante/` del repositorio y confirma el cambio en `main`.
 4. Comandante sincroniza el paquete más reciente al abrirse.
 
