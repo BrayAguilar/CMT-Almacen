@@ -86,7 +86,7 @@ function render(){
   $('#pendingOut').textContent=C.fmt(pendingOut);$('#pendingIn').textContent=C.fmt(pendingIn);
   $('#lowCount').textContent=C.fmt(low.length);$('#delivered').textContent=C.fmt(delivered);
   $('#updateStatus').innerHTML=control.importedAt
-    ?`${control.source==='publicado'?'Información sincronizada desde GitHub':'Información actualizada'} el <b>${C.esc(new Date(control.importedAt).toLocaleString('es-MX'))}</b>. Archivo número ${C.fmt(control.sequence)}.`
+    ?`Información sincronizada el <b>${C.esc(new Date(control.importedAt).toLocaleString('es-MX'))}</b>. Archivo número ${C.fmt(control.sequence)}.`
     :'<b>Esperando la primera actualización.</b> Los movimientos se sincronizan automáticamente desde el repositorio al abrir esta aplicación.';
   const recent=events().filter(x=>(x.tipo==='Entrada'&&x.estado==='Entregada')||(x.tipo==='Salida'&&x.estado==='Recibido')).sort((a,b)=>C.eventDate(b).localeCompare(C.eventDate(a))).slice(0,10);
   $('#latest').innerHTML=recent.length?C.table(['Fecha','Movimiento','Unidad','Consumible','Cantidad'],recent.map(x=>[
