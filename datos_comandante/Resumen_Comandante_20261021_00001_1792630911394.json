@@ -1,0 +1,1028 @@
+{
+  "format": "almacen-comandante-resumen",
+  "version": 1,
+  "baseVersion": "Carga_Consumibles_2026-10-21_v2_min10",
+  "snapshotId": "01b509c0-c03f-445f-bd9d-25f59d0a8d2b",
+  "sequence": 1,
+  "createdAt": "2026-10-22T01:01:51.392Z",
+  "records": [
+    {
+      "tipo": "Salida",
+      "estado": "Recibido",
+      "fecha": "2026-10-21",
+      "organismo": "Unidad 01",
+      "codigo": "CE255A",
+      "cantidad": 1
+    },
+    {
+      "tipo": "Salida",
+      "estado": "Recibido",
+      "fecha": "2026-10-21",
+      "organismo": "Unidad 01",
+      "codigo": "CF258A",
+      "cantidad": 1
+    },
+    {
+      "tipo": "Salida",
+      "estado": "Recibido",
+      "fecha": "2026-10-21",
+      "organismo": "Unidad 01",
+      "codigo": "W1510A",
+      "cantidad": 1
+    },
+    {
+      "tipo": "Salida",
+      "estado": "Recibido",
+      "fecha": "2026-10-21",
+      "organismo": "Unidad 02",
+      "codigo": "W2300A",
+      "cantidad": 2
+    },
+    {
+      "tipo": "Salida",
+      "estado": "Recibido",
+      "fecha": "2026-10-21",
+      "organismo": "Unidad 02",
+      "codigo": "W2301A",
+      "cantidad": 2
+    },
+    {
+      "tipo": "Salida",
+      "estado": "Recibido",
+      "fecha": "2026-10-21",
+      "organismo": "Unidad 02",
+      "codigo": "W2302A",
+      "cantidad": 2
+    },
+    {
+      "tipo": "Salida",
+      "estado": "Recibido",
+      "fecha": "2026-10-21",
+      "organismo": "Unidad 02",
+      "codigo": "W2303A",
+      "cantidad": 2
+    },
+    {
+      "tipo": "Salida",
+      "estado": "Recibido",
+      "fecha": "2026-10-21",
+      "organismo": "Unidad 03",
+      "codigo": "CE255A",
+      "cantidad": 4
+    },
+    {
+      "tipo": "Salida",
+      "estado": "Recibido",
+      "fecha": "2026-10-21",
+      "organismo": "Unidad 04",
+      "codigo": "CE255A",
+      "cantidad": 1
+    },
+    {
+      "tipo": "Salida",
+      "estado": "Recibido",
+      "fecha": "2026-10-21",
+      "organismo": "Unidad 04",
+      "codigo": "CE390A",
+      "cantidad": 1
+    },
+    {
+      "tipo": "Salida",
+      "estado": "Recibido",
+      "fecha": "2026-10-21",
+      "organismo": "Unidad 04",
+      "codigo": "CF232A",
+      "cantidad": 1
+    },
+    {
+      "tipo": "Salida",
+      "estado": "Recibido",
+      "fecha": "2026-10-21",
+      "organismo": "Unidad 04",
+      "codigo": "CF258A",
+      "cantidad": 2
+    },
+    {
+      "tipo": "Salida",
+      "estado": "Recibido",
+      "fecha": "2026-10-21",
+      "organismo": "Unidad 05",
+      "codigo": "W1510A",
+      "cantidad": 2
+    },
+    {
+      "tipo": "Salida",
+      "estado": "Recibido",
+      "fecha": "2026-10-21",
+      "organismo": "Unidad 06",
+      "codigo": "CE255A",
+      "cantidad": 2
+    }
+  ],
+  "inventory": [
+    {
+      "codigo": "W2020A",
+      "fisico": 276,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 276
+    },
+    {
+      "codigo": "W2021A",
+      "fisico": 337,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 337
+    },
+    {
+      "codigo": "W2022A",
+      "fisico": 303,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 303
+    },
+    {
+      "codigo": "W2023A",
+      "fisico": 323,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 323
+    },
+    {
+      "codigo": "W2220A",
+      "fisico": 9,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 9
+    },
+    {
+      "codigo": "W2221A",
+      "fisico": 9,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 9
+    },
+    {
+      "codigo": "W2222A",
+      "fisico": 10,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 10
+    },
+    {
+      "codigo": "W2223A",
+      "fisico": 8,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 8
+    },
+    {
+      "codigo": "W2110A",
+      "fisico": 2,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 2
+    },
+    {
+      "codigo": "W2111A",
+      "fisico": 3,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 3
+    },
+    {
+      "codigo": "W2112A",
+      "fisico": 2,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 2
+    },
+    {
+      "codigo": "W2113A",
+      "fisico": 2,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 2
+    },
+    {
+      "codigo": "W2301A",
+      "fisico": 8,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 2,
+      "disponible": 8
+    },
+    {
+      "codigo": "CF360A",
+      "fisico": 90,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 90
+    },
+    {
+      "codigo": "CF361A",
+      "fisico": 183,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 183
+    },
+    {
+      "codigo": "CF362A",
+      "fisico": 115,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 115
+    },
+    {
+      "codigo": "CF363A",
+      "fisico": 180,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 180
+    },
+    {
+      "codigo": "CF230A",
+      "fisico": 136,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 136
+    },
+    {
+      "codigo": "CF232A",
+      "fisico": 161,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 1,
+      "disponible": 161
+    },
+    {
+      "codigo": "CF287A",
+      "fisico": 96,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 96
+    },
+    {
+      "codigo": "CE390A",
+      "fisico": 40,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 1,
+      "disponible": 40
+    },
+    {
+      "codigo": "OK5112",
+      "fisico": 43,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 43
+    },
+    {
+      "codigo": "CE278A",
+      "fisico": 19,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 19
+    },
+    {
+      "codigo": "CE285A",
+      "fisico": 14,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 14
+    },
+    {
+      "codigo": "CF279A",
+      "fisico": 1,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 1
+    },
+    {
+      "codigo": "Q5949A",
+      "fisico": 2,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 2
+    },
+    {
+      "codigo": "Q2612A",
+      "fisico": 4,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 4
+    },
+    {
+      "codigo": "W1470A",
+      "fisico": 8,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 8
+    },
+    {
+      "codigo": "TN-850",
+      "fisico": 3,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 3
+    },
+    {
+      "codigo": "W1500A",
+      "fisico": 29,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 29
+    },
+    {
+      "codigo": "W1105A",
+      "fisico": 9,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 9
+    },
+    {
+      "codigo": "CF411A",
+      "fisico": 3,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 3
+    },
+    {
+      "codigo": "CF412A",
+      "fisico": 12,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 12
+    },
+    {
+      "codigo": "CF413A",
+      "fisico": 40,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 40
+    },
+    {
+      "codigo": "CF403A",
+      "fisico": 1,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 1
+    },
+    {
+      "codigo": "Q5949A-2",
+      "fisico": 3,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 3
+    },
+    {
+      "codigo": "CF500A",
+      "fisico": 11,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 11
+    },
+    {
+      "codigo": "CF501A",
+      "fisico": 17,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 17
+    },
+    {
+      "codigo": "CF502A",
+      "fisico": 15,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 15
+    },
+    {
+      "codigo": "CF503A",
+      "fisico": 20,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 20
+    },
+    {
+      "codigo": "CF450A",
+      "fisico": 12,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 12
+    },
+    {
+      "codigo": "CF451A",
+      "fisico": 12,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 12
+    },
+    {
+      "codigo": "CF452A",
+      "fisico": 12,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 12
+    },
+    {
+      "codigo": "CF453A",
+      "fisico": 13,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 13
+    },
+    {
+      "codigo": "XC310-AMARILLO",
+      "fisico": 1,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 1
+    },
+    {
+      "codigo": "XC310-MAGENTA",
+      "fisico": 2,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 2
+    },
+    {
+      "codigo": "CE310A",
+      "fisico": 2,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 2
+    },
+    {
+      "codigo": "CF510A",
+      "fisico": 4,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 4
+    },
+    {
+      "codigo": "CF511A",
+      "fisico": 3,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 3
+    },
+    {
+      "codigo": "CF512A",
+      "fisico": 3,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 3
+    },
+    {
+      "codigo": "CF513A",
+      "fisico": 3,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 3
+    },
+    {
+      "codigo": "CE505A",
+      "fisico": 7,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 7
+    },
+    {
+      "codigo": "CF289A",
+      "fisico": 11,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 11
+    },
+    {
+      "codigo": "B315-006R4379",
+      "fisico": 2,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 2
+    },
+    {
+      "codigo": "W1450",
+      "fisico": 3,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 3
+    },
+    {
+      "codigo": "W1510",
+      "fisico": 9,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 9
+    },
+    {
+      "codigo": "CF258A",
+      "fisico": 12,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 3,
+      "disponible": 12
+    },
+    {
+      "codigo": "821A-CIAN",
+      "fisico": 5,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 5
+    },
+    {
+      "codigo": "821A-MAGENTA",
+      "fisico": 5,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 5
+    },
+    {
+      "codigo": "821A-MAGENTA-LIGHT",
+      "fisico": 2,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 2
+    },
+    {
+      "codigo": "821A-BLACK",
+      "fisico": 1,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 1
+    },
+    {
+      "codigo": "821A-OPTIMIZADOR-",
+      "fisico": 1,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 1
+    },
+    {
+      "codigo": "94A-BLACK",
+      "fisico": 7,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 7
+    },
+    {
+      "codigo": "954A-BLACK",
+      "fisico": 1,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 1
+    },
+    {
+      "codigo": "954A-MAGENTA",
+      "fisico": 1,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 1
+    },
+    {
+      "codigo": "954A-CIAN",
+      "fisico": 1,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 1
+    },
+    {
+      "codigo": "72A-BLACK",
+      "fisico": 1,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 1
+    },
+    {
+      "codigo": "95A-TRICOLOR",
+      "fisico": 13,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 13
+    },
+    {
+      "codigo": "98A-BLACK",
+      "fisico": 11,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 11
+    },
+    {
+      "codigo": "974X-MAGENTA",
+      "fisico": 2,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 2
+    },
+    {
+      "codigo": "PIXAMA-140XL-BLACK",
+      "fisico": 3,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 3
+    },
+    {
+      "codigo": "PIXAMA-140XL-TRICOLOR",
+      "fisico": 1,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 1
+    },
+    {
+      "codigo": "CZ106A-TRICOLOR",
+      "fisico": 2,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 2
+    },
+    {
+      "codigo": "GT53A-BLACK",
+      "fisico": 5,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 5
+    },
+    {
+      "codigo": "GT53A-CIAN",
+      "fisico": 1,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 1
+    },
+    {
+      "codigo": "GT53A-YELLOW",
+      "fisico": 1,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 1
+    },
+    {
+      "codigo": "GT53A-MAGENTA",
+      "fisico": 1,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 1
+    },
+    {
+      "codigo": "664-YELLOW",
+      "fisico": 19,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 19
+    },
+    {
+      "codigo": "974A-BLACK",
+      "fisico": 93,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 93
+    },
+    {
+      "codigo": "974A-CIAN",
+      "fisico": 54,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 54
+    },
+    {
+      "codigo": "974A-YELLOW",
+      "fisico": 30,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 30
+    },
+    {
+      "codigo": "974A-MAGENTA",
+      "fisico": 54,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 54
+    },
+    {
+      "codigo": "W1510A",
+      "fisico": 129,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 3,
+      "disponible": 129
+    },
+    {
+      "codigo": "W2300A",
+      "fisico": 144,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 2,
+      "disponible": 144
+    },
+    {
+      "codigo": "W2301A-ORIG",
+      "fisico": 143,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 143
+    },
+    {
+      "codigo": "W2302A",
+      "fisico": 141,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 2,
+      "disponible": 141
+    },
+    {
+      "codigo": "W2303A",
+      "fisico": 141,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 2,
+      "disponible": 141
+    },
+    {
+      "codigo": "CE251A",
+      "fisico": 6,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 6
+    },
+    {
+      "codigo": "CE252A",
+      "fisico": 1,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 1
+    },
+    {
+      "codigo": "CE253A",
+      "fisico": 2,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 2
+    },
+    {
+      "codigo": "W2110A-ORIG",
+      "fisico": 1,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 1
+    },
+    {
+      "codigo": "Q6511A",
+      "fisico": 1,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 1
+    },
+    {
+      "codigo": "PB-310X",
+      "fisico": 2,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 2
+    },
+    {
+      "codigo": "MP-T5",
+      "fisico": 289,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 289
+    },
+    {
+      "codigo": "MPSPLUS",
+      "fisico": 202,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 202
+    },
+    {
+      "codigo": "MP-T7",
+      "fisico": 69,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 69
+    },
+    {
+      "codigo": "MPTCOL-MAOS-MAGENTA",
+      "fisico": 8,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 8
+    },
+    {
+      "codigo": "MPTCOL-COS-CIAN",
+      "fisico": 7,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 7
+    },
+    {
+      "codigo": "MPTCOL-KOS-BLACK",
+      "fisico": 10,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 10
+    },
+    {
+      "codigo": "MPTCOL-YOS-YELLOW",
+      "fisico": 8,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 8
+    },
+    {
+      "codigo": "CE255A",
+      "fisico": 725,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 8,
+      "disponible": 725
+    },
+    {
+      "codigo": "CF283A",
+      "fisico": 19,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 19
+    },
+    {
+      "codigo": "CF258A-REM",
+      "fisico": 68,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 68
+    },
+    {
+      "codigo": "CF226A",
+      "fisico": 3,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 3
+    },
+    {
+      "codigo": "CE278A-REM",
+      "fisico": 0,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 0
+    },
+    {
+      "codigo": "W2020A-REM",
+      "fisico": 1,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 1
+    },
+    {
+      "codigo": "W2023A-REM",
+      "fisico": 3,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 3
+    },
+    {
+      "codigo": "W2022A-REM",
+      "fisico": 1,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 1
+    },
+    {
+      "codigo": "W2300A-REM",
+      "fisico": 2,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 2
+    },
+    {
+      "codigo": "W2301A-REM",
+      "fisico": 4,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 4
+    },
+    {
+      "codigo": "W2302A-REM",
+      "fisico": 1,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 1
+    },
+    {
+      "codigo": "W1510A-REM",
+      "fisico": 8,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 8
+    },
+    {
+      "codigo": "CF230A-REM",
+      "fisico": 7,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 7
+    }
+  ]
+}
