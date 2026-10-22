@@ -29,7 +29,7 @@ function validatePacket(p){
   for(const x of p.records){
     only(x,['tipo','estado','fecha','organismo','codigo','cantidad']);
     if(!codes.has(String(x.codigo))||!['Entrada','Salida'].includes(x.tipo)||!/^\d{4}-\d{2}-\d{2}$/.test(x.fecha)||!Number.isInteger(Number(x.cantidad))||Number(x.cantidad)<=0)throw Error('Hay un resumen con datos incompletos o un consumible desconocido.');
-    if(!/^(Unidad \d+|Unidad sin identificar)$/.test(x.organismo||''))throw Error('El archivo debe usar claves anónimas para las unidades.');
+    if(typeof x.organismo!=='string'||!x.organismo.trim()||x.organismo.length>180)throw Error('El archivo debe incluir un nombre de unidad válido.');
     if(x.tipo==='Salida'&&!['Pendiente','Recibido'].includes(x.estado))throw Error('Una salida tiene un estado no reconocido.');
     if(x.tipo==='Entrada'&&!['Pendiente','Entregada'].includes(x.estado))throw Error('Una entrada tiene un estado no reconocido.');
   }
