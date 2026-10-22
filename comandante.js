@@ -4,8 +4,12 @@ let baseline,control;
 async function init(){
   baseline=C.fresh();
   control=await C.read('commander');
-  if(control?.format!=='almacen-comandante-resumen')control={format:'almacen-comandante-resumen',records:[],inventory:[],snapshotId:null,sequence:0,importedAt:null,createdAt:null};
+  if(control?.format!=='almacen-comandante-resumen'||control.baseVersion!==C.BASE_VERSION)control={format:'almacen-comandante-resumen',baseVersion:C.BASE_VERSION,records:[],inventory:[],snapshotId:null,sequence:0,importedAt:null,createdAt:null};
   control.records=control.records||[];control.inventory=control.inventory||[];
+  if(!control.inventory.length&&!control.snapshotId){
+    const opening=new Map(baseline.opening.map(x=>[x.codigo,Number(x.cantidad)||0]));
+    control.inventory=baseline.catalog.map(p=>{const quantity=opening.get(p.codigo)||0;return {codigo:p.codigo,fisico:quantity,pendiente:0,entradaPendiente:0,entregado:0,disponible:quantity}});
+  }
   await C.write('commander',control);
   await syncPublishedUpdate();
   document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{
@@ -61,7 +65,7 @@ async function syncPublishedUpdate(){
       catch(error){console.warn(`Se omitió ${file.name}:`,error);}
     }
     if(!latest||latest.snapshotId===control.snapshotId||!isPacketNewer(latest,control))return;
-    control={format:latest.format,records:latest.records,inventory:latest.inventory,snapshotId:latest.snapshotId,sequence:Number(latest.sequence),importedAt:new Date().toISOString(),createdAt:latest.createdAt||null,source:'publicado'};
+    control={format:latest.format,baseVersion:C.BASE_VERSION,records:latest.records,inventory:latest.inventory,snapshotId:latest.snapshotId,sequence:Number(latest.sequence),importedAt:new Date().toISOString(),createdAt:latest.createdAt||null,source:'publicado'};
     await C.write('commander',control);
   }catch(error){console.warn('No se pudo sincronizar la actualización publicada:',error);}
 }
