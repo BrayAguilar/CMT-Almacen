@@ -5,7 +5,7 @@ Aplicación estática para consultar inventario y estadísticas. Al abrirse, bus
 ## Flujo de actualización
 
 1. En Administración, importa el archivo original de Entrega.
-2. Pulsa **Crear paquete depurado para Comandante** y selecciona la carpeta `Aplicacion_Entrega`, donde está el programa de Entrega. Administración creará `Aplicacion_Entrega/datos_comandante/Resumen_Comandante_*.json`.
+2. Pulsa **Crear paquete depurado para Comandante** y selecciona la carpeta `Aplicacion_Administrador`. Administración guardará el archivo en `Aplicacion_Administrador/Actualizacione_Comandante/Resumen_Comandante_*.json`, junto a `Actualizaciones_Entrega`.
 3. Para publicar la actualización, copia únicamente el paquete depurado a esta carpeta `datos_comandante/` del repositorio y confirma el cambio en `main`.
 4. Comandante sincroniza el paquete más reciente al abrirse.
 
