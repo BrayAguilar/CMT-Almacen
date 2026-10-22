@@ -1,5 +1,3 @@
-# Actualizaciones de Entrega
+# No subir archivos originales de Entrega
 
-Sube aquí los archivos JSON originales generados por el programa de Entrega, conservando sus nombres, por ejemplo `Actualizacion_Almacen_20261021_00002.json`.
-
-Comandante revisa los archivos JSON de esta carpeta al abrirse y carga el paquete válido más reciente según su fecha de generación. Conserva aquí los archivos anteriores como historial. El repositorio es público: el contenido de estos archivos y sus versiones será visible para cualquiera.
+Los JSON originales de Entrega pueden incluir nombres, folios, documentos y observaciones. No los subas aquí. Administración genera el paquete depurado para Comandante en datos_comandante/. El repositorio y el sitio son públicos.

@@ -1,19 +1,14 @@
-# Comandante — control de almacén
+# Comandante — consulta de almacén
 
-Aplicación estática para consultar inventario y estadísticas. Al abrirla, consulta en segundo plano los archivos JSON de `actualizaciones/` y carga el paquete válido con fecha de generación más reciente. El Comandante no necesita seleccionar ni cargar archivos.
+Aplicación estática para consultar inventario y estadísticas. Al abrirse, busca en segundo plano paquetes depurados en `datos_comandante/`.
 
-## Publicar una actualización de movimientos
+## Flujo de actualización
 
-1. Genera el archivo JSON desde el programa de Entrega.
-2. En GitHub, abre la carpeta `actualizaciones` y usa **Add file → Upload files**.
-3. Sube el archivo conservando su nombre original, por ejemplo `Actualizacion_Almacen_20261021_00002.json`.
-4. Confirma el cambio con un commit en la rama `main`.
-5. Abre o recarga Comandante; cargará el paquete válido más reciente de esa carpeta.
+1. En Administración, importa el archivo original de Entrega.
+2. Pulsa **Crear paquete depurado para Comandante** y selecciona la carpeta local de este repositorio. Administración creará `datos_comandante/Resumen_Comandante_*.json`.
+3. Revisa el archivo y súbelo a GitHub en `datos_comandante/`, luego confirma el commit en `main`.
+4. Comandante sincroniza el paquete más reciente al abrirse.
 
-Cada corte se queda como un archivo separado. GitHub también conserva el historial de commits. El navegador no sube ni escribe cambios en Git por sí solo.
+El paquete contiene existencias y movimientos agregados por fecha, modelo y una clave anónima de unidad. No contiene nombres de personas, folios, números o tipos de documentos, extensiones ni observaciones. El repositorio y GitHub Pages son públicos; las cantidades de inventario, modelos, fechas y claves anónimas de unidad se podrán consultar públicamente.
 
-## Datos y privacidad
-
-Este repositorio y el sitio son públicos. Cualquier persona puede descargar las actualizaciones y leer folios, unidades, fechas, consumibles y observaciones. No subas respaldos diarios ni información que no deba divulgarse.
-
-El catálogo inicial está en `datos-iniciales.js`. La aplicación no requiere compilación ni servidor de aplicaciones.
+No subas aquí archivos JSON originales de Entrega, respaldos, libros de Excel ni bases de datos. Las reglas de `.gitignore` ayudan a evitar esos archivos por accidente.

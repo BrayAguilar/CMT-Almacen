@@ -3,13 +3,9 @@ let baseline,control;
 
 async function init(){
   baseline=C.fresh();
-  control=await C.read('commander')||{records:[],snapshotId:null,sequence:0,importedAt:null};
-  control.records=control.records||[];
-  for(const x of control.records){
-    if(x.tipo==='Entrada'&&(x.estado==='Recibido'||x.estado==='Entregado'))x.estado='Entregada';
-    if(x.tipo==='Salida'&&x.estado==='Entregado')x.estado='Recibido';
-    if(['Entregada','Recibido'].includes(x.estado)&&!x.fechaCierre)x.fechaCierre=x.fechaEntrega||x.fecha;
-  }
+  control=await C.read('commander');
+  if(control?.format!=='almacen-comandante-resumen')control={format:'almacen-comandante-resumen',records:[],inventory:[],snapshotId:null,sequence:0,importedAt:null,createdAt:null};
+  control.records=control.records||[];control.inventory=control.inventory||[];
   await C.write('commander',control);
   await syncPublishedUpdate();
   document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{
@@ -23,16 +19,27 @@ async function init(){
 }
 
 function validatePacket(p){
-  if(!p||p.format!=='almacen-entrega'||p.version!==1||!Array.isArray(p.records)||!p.snapshotId)throw Error('Selecciona el archivo JSON generado por el Programa de entrega.');
-  if(p.baseVersion!==C.BASE_VERSION)throw Error('Este archivo usa otra versión del inventario base. Solicita el archivo correcto.');
-  if(!Number.isInteger(Number(p.sequence))||Number(p.sequence)<1)throw Error('El archivo no tiene una versión válida.');
-  const codes=new Set(baseline.catalog.map(x=>x.codigo)),ids=new Set();
+  const only=(obj,allowed)=>{if(Object.keys(obj).some(k=>!allowed.includes(k)))throw Error('El paquete contiene campos adicionales; no se cargó por seguridad.')};
+  if(!p||typeof p!=='object')throw Error('El archivo no es un resumen depurado para Comandante.');
+  only(p,['format','version','baseVersion','snapshotId','sequence','createdAt','records','inventory']);
+  if(p.format!=='almacen-comandante-resumen'||p.version!==1||!Array.isArray(p.records)||!Array.isArray(p.inventory)||!p.snapshotId)throw Error('El archivo no es un resumen depurado para Comandante.');
+  if(p.baseVersion!==C.BASE_VERSION)throw Error('Este archivo usa otra versión del inventario base. Solicita el resumen correcto.');
+  if(!Number.isInteger(Number(p.sequence))||Number(p.sequence)<1||!Number.isFinite(Date.parse(p.createdAt||'')))throw Error('El archivo no tiene una versión o fecha válida.');
+  const codes=new Set(baseline.catalog.map(x=>x.codigo)),inventoryCodes=new Set();
   for(const x of p.records){
-    if(!x.id||ids.has(x.id))throw Error('El archivo contiene movimientos repetidos o incompletos.');ids.add(x.id);
-    if(!codes.has(String(x.codigo))||!['Entrada','Salida'].includes(x.tipo)||!x.folio||!x.fecha||!Number.isInteger(Number(x.cantidad))||Number(x.cantidad)<=0)throw Error('Hay un movimiento con datos incompletos o un consumible desconocido.');
+    only(x,['tipo','estado','fecha','organismo','codigo','cantidad']);
+    if(!codes.has(String(x.codigo))||!['Entrada','Salida'].includes(x.tipo)||!/^\d{4}-\d{2}-\d{2}$/.test(x.fecha)||!Number.isInteger(Number(x.cantidad))||Number(x.cantidad)<=0)throw Error('Hay un resumen con datos incompletos o un consumible desconocido.');
+    if(!/^(Unidad \d+|Unidad sin identificar)$/.test(x.organismo||''))throw Error('El archivo debe usar claves anónimas para las unidades.');
     if(x.tipo==='Salida'&&!['Pendiente','Recibido'].includes(x.estado))throw Error('Una salida tiene un estado no reconocido.');
     if(x.tipo==='Entrada'&&!['Pendiente','Entregada'].includes(x.estado))throw Error('Una entrada tiene un estado no reconocido.');
   }
+  for(const x of p.inventory){
+    only(x,['codigo','fisico','pendiente','entradaPendiente','entregado','disponible']);
+    if(!codes.has(String(x.codigo))||inventoryCodes.has(String(x.codigo)))throw Error('El inventario contiene un modelo desconocido o repetido.');
+    inventoryCodes.add(String(x.codigo));
+    if(['fisico','pendiente','entradaPendiente','entregado','disponible'].some(k=>!Number.isFinite(Number(x[k]))))throw Error('El inventario contiene cantidades inválidas.');
+  }
+  if(inventoryCodes.size!==codes.size)throw Error('El resumen no incluye todos los modelos del inventario.');
 }
 
 function isPacketNewer(packet,current){
@@ -43,7 +50,7 @@ function isPacketNewer(packet,current){
 
 async function syncPublishedUpdate(){
   try{
-    const listUrl=`https://api.github.com/repos/BrayAguilar/CMT-Almacen/contents/actualizaciones?ref=main&ts=${Date.now()}`;
+    const listUrl=`https://api.github.com/repos/BrayAguilar/CMT-Almacen/contents/datos_comandante?ref=main&ts=${Date.now()}`;
     const listing=await fetch(listUrl,{headers:{Accept:'application/vnd.github+json'},cache:'no-store'});
     if(!listing.ok)return;
     const files=await listing.json();if(!Array.isArray(files))return;
@@ -54,14 +61,21 @@ async function syncPublishedUpdate(){
       catch(error){console.warn(`Se omitió ${file.name}:`,error);}
     }
     if(!latest||latest.snapshotId===control.snapshotId||!isPacketNewer(latest,control))return;
-    control={records:latest.records,snapshotId:latest.snapshotId,sequence:Number(latest.sequence),importedAt:new Date().toISOString(),createdAt:latest.createdAt||null,source:'publicado'};
+    control={format:latest.format,records:latest.records,inventory:latest.inventory,snapshotId:latest.snapshotId,sequence:Number(latest.sequence),importedAt:new Date().toISOString(),createdAt:latest.createdAt||null,source:'publicado'};
     await C.write('commander',control);
   }catch(error){console.warn('No se pudo sincronizar la actualización publicada:',error);}
 }
 
 function events(){return control.records||[];}
+function stockMap(){
+  if(Array.isArray(control.inventory)){
+    const snapshot=new Map(control.inventory.map(x=>[x.codigo,x]));
+    return new Map(baseline.catalog.map(p=>{const x=snapshot.get(p.codigo)||{};return [p.codigo,{fisico:Number(x.fisico)||0,pendiente:Number(x.pendiente)||0,entradaPendiente:Number(x.entradaPendiente)||0,entregado:Number(x.entregado)||0,disponible:Number(x.disponible)||0}]}));
+  }
+  return C.stock(baseline.catalog,baseline.opening,events());
+}
 function render(){
-  const stock=C.stock(baseline.catalog,baseline.opening,events());
+  const stock=stockMap();
   const physical=[...stock.values()].reduce((n,x)=>n+x.fisico,0);
   const pendingOut=[...stock.values()].reduce((n,x)=>n+x.pendiente,0);
   const pendingIn=[...stock.values()].reduce((n,x)=>n+x.entradaPendiente,0);
@@ -75,20 +89,20 @@ function render(){
     ?`${control.source==='publicado'?'Información sincronizada desde GitHub':'Información actualizada'} el <b>${C.esc(new Date(control.importedAt).toLocaleString('es-MX'))}</b>. Archivo número ${C.fmt(control.sequence)}.`
     :'<b>Esperando la primera actualización.</b> Los movimientos se sincronizan automáticamente desde el repositorio al abrir esta aplicación.';
   const recent=events().filter(x=>(x.tipo==='Entrada'&&x.estado==='Entregada')||(x.tipo==='Salida'&&x.estado==='Recibido')).sort((a,b)=>C.eventDate(b).localeCompare(C.eventDate(a))).slice(0,10);
-  $('#latest').innerHTML=recent.length?C.table(['Fecha','Folio','Movimiento','Unidad / proveedor','Consumible','Cantidad'],recent.map(x=>[
-    C.esc(C.eventDate(x)),C.esc(x.folio),x.tipo==='Entrada'?'Entrada recibida':'Salida entregada',C.esc(x.organismo),C.esc(baseline.catalog.find(p=>p.codigo===x.codigo)?.modelo||x.codigo),C.fmt(x.cantidad)
+  $('#latest').innerHTML=recent.length?C.table(['Fecha','Movimiento','Unidad (clave)','Consumible','Cantidad'],recent.map(x=>[
+    C.esc(C.eventDate(x)),x.tipo==='Entrada'?'Entrada recibida':'Salida entregada',C.esc(x.organismo),C.esc(baseline.catalog.find(p=>p.codigo===x.codigo)?.modelo||x.codigo),C.fmt(x.cantidad)
   ])):'<div class="empty">Todavía no hay movimientos confirmados.</div>';
   renderInventory();renderStats();
 }
 
 function renderInventory(){
   if(!baseline||!control)return;
-  const stock=C.stock(baseline.catalog,baseline.opening,events()),q=$('#invSearch').value.trim().toLowerCase();
+  const stock=stockMap(),q=$('#invSearch').value.trim().toLowerCase();
   const products=baseline.catalog.filter(p=>[p.codigo,p.modelo,p.descripcion,p.tipo].join(' ').toLowerCase().includes(q));
-  $('#inventoryTable').innerHTML=C.table(['Código','Consumible','Existencia base','Entradas recibidas','Salidas entregadas','Apartado pendiente','Disponible'],products.map(p=>{
-    const b=stock.get(p.codigo),base=baseline.opening.find(x=>x.codigo===p.codigo)?.cantidad||0;
+  $('#inventoryTable').innerHTML=C.table(['Código','Consumible','Existencia física','Entradas recibidas','Salidas entregadas','Apartado pendiente','Disponible'],products.map(p=>{
+    const b=stock.get(p.codigo);
     const incoming=events().filter(x=>x.codigo===p.codigo&&x.tipo==='Entrada'&&x.estado==='Entregada').reduce((n,x)=>n+Number(x.cantidad),0);
-    return [C.esc(p.codigo),C.esc(p.modelo||p.descripcion),C.fmt(base),C.fmt(incoming),C.fmt(b.entregado),C.fmt(b.pendiente),`<b class="${C.lowState(p,b)?'low':''}">${C.fmt(b.disponible)}</b>`];
+    return [C.esc(p.codigo),C.esc(p.modelo||p.descripcion),C.fmt(b.fisico),C.fmt(incoming),C.fmt(b.entregado),C.fmt(b.pendiente),`<b class="${C.lowState(p,b)?'low':''}">${C.fmt(b.disponible)}</b>`];
   }));
 }
 

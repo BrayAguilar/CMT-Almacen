@@ -1,0 +1,8 @@
+actualizaciones/*.json
+Actualizacion_Almacen_*.json
+Respaldo_*.json
+respaldo/
+*.accdb
+*.xlsx
+.env
+.env.*
