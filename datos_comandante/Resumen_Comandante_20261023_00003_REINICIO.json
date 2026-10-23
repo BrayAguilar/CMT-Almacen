@@ -1,127 +1,14 @@
 {
   "format": "almacen-comandante-resumen",
   "version": 1,
-  "baseVersion": "Carga_Consumibles_2026-10-21_v2_min10",
-  "snapshotId": "01b509c0-c03f-445f-bd9d-25f59d0a8d2b",
-  "sequence": 1,
-  "createdAt": "2026-10-22T01:01:51.392Z",
-  "records": [
-    {
-      "tipo": "Salida",
-      "estado": "Recibido",
-      "fecha": "2026-10-21",
-      "organismo": "Unidad 01",
-      "codigo": "CE255A",
-      "cantidad": 1
-    },
-    {
-      "tipo": "Salida",
-      "estado": "Recibido",
-      "fecha": "2026-10-21",
-      "organismo": "Unidad 01",
-      "codigo": "CF258A",
-      "cantidad": 1
-    },
-    {
-      "tipo": "Salida",
-      "estado": "Recibido",
-      "fecha": "2026-10-21",
-      "organismo": "Unidad 01",
-      "codigo": "W1510A",
-      "cantidad": 1
-    },
-    {
-      "tipo": "Salida",
-      "estado": "Recibido",
-      "fecha": "2026-10-21",
-      "organismo": "Unidad 02",
-      "codigo": "W2300A",
-      "cantidad": 2
-    },
-    {
-      "tipo": "Salida",
-      "estado": "Recibido",
-      "fecha": "2026-10-21",
-      "organismo": "Unidad 02",
-      "codigo": "W2301A",
-      "cantidad": 2
-    },
-    {
-      "tipo": "Salida",
-      "estado": "Recibido",
-      "fecha": "2026-10-21",
-      "organismo": "Unidad 02",
-      "codigo": "W2302A",
-      "cantidad": 2
-    },
-    {
-      "tipo": "Salida",
-      "estado": "Recibido",
-      "fecha": "2026-10-21",
-      "organismo": "Unidad 02",
-      "codigo": "W2303A",
-      "cantidad": 2
-    },
-    {
-      "tipo": "Salida",
-      "estado": "Recibido",
-      "fecha": "2026-10-21",
-      "organismo": "Unidad 03",
-      "codigo": "CE255A",
-      "cantidad": 4
-    },
-    {
-      "tipo": "Salida",
-      "estado": "Recibido",
-      "fecha": "2026-10-21",
-      "organismo": "Unidad 04",
-      "codigo": "CE255A",
-      "cantidad": 1
-    },
-    {
-      "tipo": "Salida",
-      "estado": "Recibido",
-      "fecha": "2026-10-21",
-      "organismo": "Unidad 04",
-      "codigo": "CE390A",
-      "cantidad": 1
-    },
-    {
-      "tipo": "Salida",
-      "estado": "Recibido",
-      "fecha": "2026-10-21",
-      "organismo": "Unidad 04",
-      "codigo": "CF232A",
-      "cantidad": 1
-    },
-    {
-      "tipo": "Salida",
-      "estado": "Recibido",
-      "fecha": "2026-10-21",
-      "organismo": "Unidad 04",
-      "codigo": "CF258A",
-      "cantidad": 2
-    },
-    {
-      "tipo": "Salida",
-      "estado": "Recibido",
-      "fecha": "2026-10-21",
-      "organismo": "Unidad 05",
-      "codigo": "W1510A",
-      "cantidad": 2
-    },
-    {
-      "tipo": "Salida",
-      "estado": "Recibido",
-      "fecha": "2026-10-21",
-      "organismo": "Unidad 06",
-      "codigo": "CE255A",
-      "cantidad": 2
-    }
-  ],
+  "baseVersion": "Existencias_2026-10-22_v2_gen",
+  "snapshotId": "f4151a76-6830-4427-bb7f-08bbc7fc4e77",
+  "sequence": 3,
+  "createdAt": "2026-10-23T14:12:47.275Z",
+  "records": [],
   "inventory": [
     {
-      "codigo": "W2020A",
+      "codigo": "W2020A-GEN",
       "fisico": 276,
       "pendiente": 0,
       "entradaPendiente": 0,
@@ -129,7 +16,7 @@
       "disponible": 276
     },
     {
-      "codigo": "W2021A",
+      "codigo": "W2021A-GEN",
       "fisico": 337,
       "pendiente": 0,
       "entradaPendiente": 0,
@@ -137,7 +24,7 @@
       "disponible": 337
     },
     {
-      "codigo": "W2022A",
+      "codigo": "W2022A-GEN",
       "fisico": 303,
       "pendiente": 0,
       "entradaPendiente": 0,
@@ -145,7 +32,7 @@
       "disponible": 303
     },
     {
-      "codigo": "W2023A",
+      "codigo": "W2023A-GEN",
       "fisico": 323,
       "pendiente": 0,
       "entradaPendiente": 0,
@@ -153,7 +40,7 @@
       "disponible": 323
     },
     {
-      "codigo": "W2220A",
+      "codigo": "W2220A-GEN",
       "fisico": 9,
       "pendiente": 0,
       "entradaPendiente": 0,
@@ -161,7 +48,7 @@
       "disponible": 9
     },
     {
-      "codigo": "W2221A",
+      "codigo": "W2221A-GEN",
       "fisico": 9,
       "pendiente": 0,
       "entradaPendiente": 0,
@@ -169,7 +56,7 @@
       "disponible": 9
     },
     {
-      "codigo": "W2222A",
+      "codigo": "W2222A-GEN",
       "fisico": 10,
       "pendiente": 0,
       "entradaPendiente": 0,
@@ -177,7 +64,7 @@
       "disponible": 10
     },
     {
-      "codigo": "W2223A",
+      "codigo": "W2223A-GEN",
       "fisico": 8,
       "pendiente": 0,
       "entradaPendiente": 0,
@@ -185,7 +72,7 @@
       "disponible": 8
     },
     {
-      "codigo": "W2110A",
+      "codigo": "W2110A-GEN",
       "fisico": 2,
       "pendiente": 0,
       "entradaPendiente": 0,
@@ -193,7 +80,7 @@
       "disponible": 2
     },
     {
-      "codigo": "W2111A",
+      "codigo": "W2111A-GEN",
       "fisico": 3,
       "pendiente": 0,
       "entradaPendiente": 0,
@@ -201,7 +88,7 @@
       "disponible": 3
     },
     {
-      "codigo": "W2112A",
+      "codigo": "W2112A-GEN",
       "fisico": 2,
       "pendiente": 0,
       "entradaPendiente": 0,
@@ -209,7 +96,7 @@
       "disponible": 2
     },
     {
-      "codigo": "W2113A",
+      "codigo": "W2113A-GEN",
       "fisico": 2,
       "pendiente": 0,
       "entradaPendiente": 0,
@@ -217,15 +104,15 @@
       "disponible": 2
     },
     {
-      "codigo": "W2301A",
-      "fisico": 8,
+      "codigo": "W2301A-GEN",
+      "fisico": 10,
       "pendiente": 0,
       "entradaPendiente": 0,
-      "entregado": 2,
-      "disponible": 8
+      "entregado": 0,
+      "disponible": 10
     },
     {
-      "codigo": "CF360A",
+      "codigo": "CF360A-GEN",
       "fisico": 90,
       "pendiente": 0,
       "entradaPendiente": 0,
@@ -233,7 +120,7 @@
       "disponible": 90
     },
     {
-      "codigo": "CF361A",
+      "codigo": "CF361A-GEN",
       "fisico": 183,
       "pendiente": 0,
       "entradaPendiente": 0,
@@ -241,7 +128,7 @@
       "disponible": 183
     },
     {
-      "codigo": "CF362A",
+      "codigo": "CF362A-GEN",
       "fisico": 115,
       "pendiente": 0,
       "entradaPendiente": 0,
@@ -249,7 +136,7 @@
       "disponible": 115
     },
     {
-      "codigo": "CF363A",
+      "codigo": "CF363A-GEN",
       "fisico": 180,
       "pendiente": 0,
       "entradaPendiente": 0,
@@ -257,7 +144,7 @@
       "disponible": 180
     },
     {
-      "codigo": "CF230A",
+      "codigo": "CF230A-GEN",
       "fisico": 136,
       "pendiente": 0,
       "entradaPendiente": 0,
@@ -265,15 +152,15 @@
       "disponible": 136
     },
     {
-      "codigo": "CF232A",
+      "codigo": "CF232A-GEN",
       "fisico": 161,
       "pendiente": 0,
       "entradaPendiente": 0,
-      "entregado": 1,
+      "entregado": 0,
       "disponible": 161
     },
     {
-      "codigo": "CF287A",
+      "codigo": "CF287A-GEN",
       "fisico": 96,
       "pendiente": 0,
       "entradaPendiente": 0,
@@ -281,15 +168,15 @@
       "disponible": 96
     },
     {
-      "codigo": "CE390A",
+      "codigo": "CE390A-GEN",
       "fisico": 40,
       "pendiente": 0,
       "entradaPendiente": 0,
-      "entregado": 1,
+      "entregado": 0,
       "disponible": 40
     },
     {
-      "codigo": "OK5112",
+      "codigo": "OK5112-GEN",
       "fisico": 43,
       "pendiente": 0,
       "entradaPendiente": 0,
@@ -297,7 +184,7 @@
       "disponible": 43
     },
     {
-      "codigo": "CE278A",
+      "codigo": "CE278A-GEN",
       "fisico": 19,
       "pendiente": 0,
       "entradaPendiente": 0,
@@ -305,7 +192,7 @@
       "disponible": 19
     },
     {
-      "codigo": "CE285A",
+      "codigo": "CE285A-GEN",
       "fisico": 14,
       "pendiente": 0,
       "entradaPendiente": 0,
@@ -313,7 +200,7 @@
       "disponible": 14
     },
     {
-      "codigo": "CF279A",
+      "codigo": "CF279A-GEN",
       "fisico": 1,
       "pendiente": 0,
       "entradaPendiente": 0,
@@ -321,15 +208,15 @@
       "disponible": 1
     },
     {
-      "codigo": "Q5949A",
-      "fisico": 2,
+      "codigo": "Q5949A-GEN",
+      "fisico": 5,
       "pendiente": 0,
       "entradaPendiente": 0,
       "entregado": 0,
-      "disponible": 2
+      "disponible": 5
     },
     {
-      "codigo": "Q2612A",
+      "codigo": "Q2612A-GEN",
       "fisico": 4,
       "pendiente": 0,
       "entradaPendiente": 0,
@@ -337,7 +224,7 @@
       "disponible": 4
     },
     {
-      "codigo": "W1470A",
+      "codigo": "W1470A-GEN",
       "fisico": 8,
       "pendiente": 0,
       "entradaPendiente": 0,
@@ -345,7 +232,7 @@
       "disponible": 8
     },
     {
-      "codigo": "TN-850",
+      "codigo": "TN-850-GEN",
       "fisico": 3,
       "pendiente": 0,
       "entradaPendiente": 0,
@@ -353,7 +240,7 @@
       "disponible": 3
     },
     {
-      "codigo": "W1500A",
+      "codigo": "W1500A-GEN",
       "fisico": 29,
       "pendiente": 0,
       "entradaPendiente": 0,
@@ -361,7 +248,7 @@
       "disponible": 29
     },
     {
-      "codigo": "W1105A",
+      "codigo": "W1105A-GEN",
       "fisico": 9,
       "pendiente": 0,
       "entradaPendiente": 0,
@@ -369,7 +256,7 @@
       "disponible": 9
     },
     {
-      "codigo": "CF411A",
+      "codigo": "CF411A-GEN",
       "fisico": 3,
       "pendiente": 0,
       "entradaPendiente": 0,
@@ -377,7 +264,7 @@
       "disponible": 3
     },
     {
-      "codigo": "CF412A",
+      "codigo": "CF412A-GEN",
       "fisico": 12,
       "pendiente": 0,
       "entradaPendiente": 0,
@@ -385,7 +272,7 @@
       "disponible": 12
     },
     {
-      "codigo": "CF413A",
+      "codigo": "CF413A-GEN",
       "fisico": 40,
       "pendiente": 0,
       "entradaPendiente": 0,
@@ -393,7 +280,7 @@
       "disponible": 40
     },
     {
-      "codigo": "CF403A",
+      "codigo": "CF403A-GEN",
       "fisico": 1,
       "pendiente": 0,
       "entradaPendiente": 0,
@@ -401,15 +288,7 @@
       "disponible": 1
     },
     {
-      "codigo": "Q5949A-2",
-      "fisico": 3,
-      "pendiente": 0,
-      "entradaPendiente": 0,
-      "entregado": 0,
-      "disponible": 3
-    },
-    {
-      "codigo": "CF500A",
+      "codigo": "CF500A-GEN",
       "fisico": 11,
       "pendiente": 0,
       "entradaPendiente": 0,
@@ -417,7 +296,7 @@
       "disponible": 11
     },
     {
-      "codigo": "CF501A",
+      "codigo": "CF501A-GEN",
       "fisico": 17,
       "pendiente": 0,
       "entradaPendiente": 0,
@@ -425,7 +304,7 @@
       "disponible": 17
     },
     {
-      "codigo": "CF502A",
+      "codigo": "CF502A-GEN",
       "fisico": 15,
       "pendiente": 0,
       "entradaPendiente": 0,
@@ -433,7 +312,7 @@
       "disponible": 15
     },
     {
-      "codigo": "CF503A",
+      "codigo": "CF503A-GEN",
       "fisico": 20,
       "pendiente": 0,
       "entradaPendiente": 0,
@@ -441,7 +320,7 @@
       "disponible": 20
     },
     {
-      "codigo": "CF450A",
+      "codigo": "CF450A-GEN",
       "fisico": 12,
       "pendiente": 0,
       "entradaPendiente": 0,
@@ -449,7 +328,7 @@
       "disponible": 12
     },
     {
-      "codigo": "CF451A",
+      "codigo": "CF451A-GEN",
       "fisico": 12,
       "pendiente": 0,
       "entradaPendiente": 0,
@@ -457,7 +336,7 @@
       "disponible": 12
     },
     {
-      "codigo": "CF452A",
+      "codigo": "CF452A-GEN",
       "fisico": 12,
       "pendiente": 0,
       "entradaPendiente": 0,
@@ -465,7 +344,7 @@
       "disponible": 12
     },
     {
-      "codigo": "CF453A",
+      "codigo": "CF453A-GEN",
       "fisico": 13,
       "pendiente": 0,
       "entradaPendiente": 0,
@@ -473,7 +352,7 @@
       "disponible": 13
     },
     {
-      "codigo": "XC310-AMARILLO",
+      "codigo": "XC310-AMARILLO-GEN",
       "fisico": 1,
       "pendiente": 0,
       "entradaPendiente": 0,
@@ -481,7 +360,7 @@
       "disponible": 1
     },
     {
-      "codigo": "XC310-MAGENTA",
+      "codigo": "XC310-MAGENTA-GEN",
       "fisico": 2,
       "pendiente": 0,
       "entradaPendiente": 0,
@@ -489,7 +368,7 @@
       "disponible": 2
     },
     {
-      "codigo": "CE310A",
+      "codigo": "CE310A-GEN",
       "fisico": 2,
       "pendiente": 0,
       "entradaPendiente": 0,
@@ -497,7 +376,7 @@
       "disponible": 2
     },
     {
-      "codigo": "CF510A",
+      "codigo": "CF510A-GEN",
       "fisico": 4,
       "pendiente": 0,
       "entradaPendiente": 0,
@@ -505,7 +384,7 @@
       "disponible": 4
     },
     {
-      "codigo": "CF511A",
+      "codigo": "CF511A-GEN",
       "fisico": 3,
       "pendiente": 0,
       "entradaPendiente": 0,
@@ -513,7 +392,7 @@
       "disponible": 3
     },
     {
-      "codigo": "CF512A",
+      "codigo": "CF512A-GEN",
       "fisico": 3,
       "pendiente": 0,
       "entradaPendiente": 0,
@@ -521,7 +400,7 @@
       "disponible": 3
     },
     {
-      "codigo": "CF513A",
+      "codigo": "CF513A-GEN",
       "fisico": 3,
       "pendiente": 0,
       "entradaPendiente": 0,
@@ -529,7 +408,7 @@
       "disponible": 3
     },
     {
-      "codigo": "CE505A",
+      "codigo": "CE505A-GEN",
       "fisico": 7,
       "pendiente": 0,
       "entradaPendiente": 0,
@@ -537,7 +416,7 @@
       "disponible": 7
     },
     {
-      "codigo": "CF289A",
+      "codigo": "CF289A-GEN",
       "fisico": 11,
       "pendiente": 0,
       "entradaPendiente": 0,
@@ -545,7 +424,7 @@
       "disponible": 11
     },
     {
-      "codigo": "B315-006R4379",
+      "codigo": "B315-006R4379-GEN",
       "fisico": 2,
       "pendiente": 0,
       "entradaPendiente": 0,
@@ -553,7 +432,7 @@
       "disponible": 2
     },
     {
-      "codigo": "W1450",
+      "codigo": "W1450-GEN",
       "fisico": 3,
       "pendiente": 0,
       "entradaPendiente": 0,
@@ -561,20 +440,20 @@
       "disponible": 3
     },
     {
-      "codigo": "W1510",
-      "fisico": 9,
+      "codigo": "W1510-GEN",
+      "fisico": 8,
       "pendiente": 0,
       "entradaPendiente": 0,
       "entregado": 0,
-      "disponible": 9
+      "disponible": 8
     },
     {
-      "codigo": "CF258A",
-      "fisico": 12,
+      "codigo": "CF258A-GEN",
+      "fisico": 13,
       "pendiente": 0,
       "entradaPendiente": 0,
-      "entregado": 3,
-      "disponible": 12
+      "entregado": 0,
+      "disponible": 13
     },
     {
       "codigo": "821A-CIAN",
@@ -609,7 +488,7 @@
       "disponible": 1
     },
     {
-      "codigo": "821A-OPTIMIZADOR-",
+      "codigo": "821A-OPTIMIZADOR",
       "fisico": 1,
       "pendiente": 0,
       "entradaPendiente": 0,
@@ -697,7 +576,7 @@
       "disponible": 1
     },
     {
-      "codigo": "CZ106A-TRICOLOR",
+      "codigo": "CZ106A-TRICOLOR-GEN",
       "fisico": 2,
       "pendiente": 0,
       "entradaPendiente": 0,
@@ -777,47 +656,47 @@
       "disponible": 54
     },
     {
-      "codigo": "W1510A",
-      "fisico": 129,
-      "pendiente": 0,
-      "entradaPendiente": 0,
-      "entregado": 3,
-      "disponible": 129
-    },
-    {
-      "codigo": "W2300A",
-      "fisico": 144,
-      "pendiente": 0,
-      "entradaPendiente": 0,
-      "entregado": 2,
-      "disponible": 144
-    },
-    {
-      "codigo": "W2301A-ORIG",
-      "fisico": 143,
+      "codigo": "W1510A-NUEVO-ORIGINAL",
+      "fisico": 130,
       "pendiente": 0,
       "entradaPendiente": 0,
       "entregado": 0,
-      "disponible": 143
+      "disponible": 130
     },
     {
-      "codigo": "W2302A",
+      "codigo": "W2300A-NUEVO-ORIGINAL",
+      "fisico": 144,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 144
+    },
+    {
+      "codigo": "W2301A-NUEVO-ORIGINAL",
       "fisico": 141,
       "pendiente": 0,
       "entradaPendiente": 0,
-      "entregado": 2,
+      "entregado": 0,
       "disponible": 141
     },
     {
-      "codigo": "W2303A",
+      "codigo": "W2302A-NUEVO-ORIGINAL",
       "fisico": 141,
       "pendiente": 0,
       "entradaPendiente": 0,
-      "entregado": 2,
+      "entregado": 0,
       "disponible": 141
     },
     {
-      "codigo": "CE251A",
+      "codigo": "W2303A-NUEVO-ORIGINAL",
+      "fisico": 141,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 141
+    },
+    {
+      "codigo": "CE251A-NUEVO-ORIGINAL",
       "fisico": 6,
       "pendiente": 0,
       "entradaPendiente": 0,
@@ -825,7 +704,7 @@
       "disponible": 6
     },
     {
-      "codigo": "CE252A",
+      "codigo": "CE252A-NUEVO-ORIGINAL",
       "fisico": 1,
       "pendiente": 0,
       "entradaPendiente": 0,
@@ -833,7 +712,7 @@
       "disponible": 1
     },
     {
-      "codigo": "CE253A",
+      "codigo": "CE253A-NUEVO-ORIGINAL",
       "fisico": 2,
       "pendiente": 0,
       "entradaPendiente": 0,
@@ -841,7 +720,7 @@
       "disponible": 2
     },
     {
-      "codigo": "W2110A-ORIG",
+      "codigo": "W2110A-NUEVO-ORIGINAL",
       "fisico": 1,
       "pendiente": 0,
       "entradaPendiente": 0,
@@ -849,7 +728,7 @@
       "disponible": 1
     },
     {
-      "codigo": "Q6511A",
+      "codigo": "Q6511A-NUEVO-ORIGINAL",
       "fisico": 1,
       "pendiente": 0,
       "entradaPendiente": 0,
@@ -857,7 +736,7 @@
       "disponible": 1
     },
     {
-      "codigo": "PB-310X",
+      "codigo": "PB-310X-NUEVO-ORIGINAL",
       "fisico": 2,
       "pendiente": 0,
       "entradaPendiente": 0,
@@ -865,7 +744,7 @@
       "disponible": 2
     },
     {
-      "codigo": "MP-T5",
+      "codigo": "POLVO-TONER-ESTATIC-CONTROL-MP-T5",
       "fisico": 289,
       "pendiente": 0,
       "entradaPendiente": 0,
@@ -873,7 +752,7 @@
       "disponible": 289
     },
     {
-      "codigo": "MPSPLUS",
+      "codigo": "POLVO-TONER-ESTATIC-CONTROL-MPSPLUS",
       "fisico": 202,
       "pendiente": 0,
       "entradaPendiente": 0,
@@ -881,7 +760,7 @@
       "disponible": 202
     },
     {
-      "codigo": "MP-T7",
+      "codigo": "POLVO-TONER-ESTATIC-CONTROL-MP-T7",
       "fisico": 69,
       "pendiente": 0,
       "entradaPendiente": 0,
@@ -889,7 +768,7 @@
       "disponible": 69
     },
     {
-      "codigo": "MPTCOL-MAOS-MAGENTA",
+      "codigo": "POLVO-TONER-ESTATIC-CONTROL-MPTCOL-MAOS-MAGENTA",
       "fisico": 8,
       "pendiente": 0,
       "entradaPendiente": 0,
@@ -897,7 +776,7 @@
       "disponible": 8
     },
     {
-      "codigo": "MPTCOL-COS-CIAN",
+      "codigo": "POLVO-TONER-ESTATIC-CONTROL-MPTCOL-COS-CIAN",
       "fisico": 7,
       "pendiente": 0,
       "entradaPendiente": 0,
@@ -905,7 +784,7 @@
       "disponible": 7
     },
     {
-      "codigo": "MPTCOL-KOS-BLACK",
+      "codigo": "POLVO-TONER-ESTATIC-CONTROL-MPTCOL-KOS-BLACK",
       "fisico": 10,
       "pendiente": 0,
       "entradaPendiente": 0,
@@ -913,7 +792,7 @@
       "disponible": 10
     },
     {
-      "codigo": "MPTCOL-YOS-YELLOW",
+      "codigo": "POLVO-TONER-ESTATIC-CONTROL-MPTCOL-YOS-YELLOW",
       "fisico": 8,
       "pendiente": 0,
       "entradaPendiente": 0,
@@ -921,15 +800,15 @@
       "disponible": 8
     },
     {
-      "codigo": "CE255A",
-      "fisico": 725,
+      "codigo": "CE255A-REM",
+      "fisico": 728,
       "pendiente": 0,
       "entradaPendiente": 0,
-      "entregado": 8,
-      "disponible": 725
+      "entregado": 0,
+      "disponible": 728
     },
     {
-      "codigo": "CF283A",
+      "codigo": "CF283A-REM",
       "fisico": 19,
       "pendiente": 0,
       "entradaPendiente": 0,
@@ -938,14 +817,14 @@
     },
     {
       "codigo": "CF258A-REM",
-      "fisico": 68,
+      "fisico": 0,
       "pendiente": 0,
       "entradaPendiente": 0,
       "entregado": 0,
-      "disponible": 68
+      "disponible": 0
     },
     {
-      "codigo": "CF226A",
+      "codigo": "CF226A-REM",
       "fisico": 3,
       "pendiente": 0,
       "entradaPendiente": 0,
@@ -954,14 +833,6 @@
     },
     {
       "codigo": "CE278A-REM",
-      "fisico": 0,
-      "pendiente": 0,
-      "entradaPendiente": 0,
-      "entregado": 0,
-      "disponible": 0
-    },
-    {
-      "codigo": "W2020A-REM",
       "fisico": 1,
       "pendiente": 0,
       "entradaPendiente": 0,
@@ -969,7 +840,7 @@
       "disponible": 1
     },
     {
-      "codigo": "W2023A-REM",
+      "codigo": "W2020A-REM",
       "fisico": 3,
       "pendiente": 0,
       "entradaPendiente": 0,
@@ -977,12 +848,20 @@
       "disponible": 3
     },
     {
-      "codigo": "W2022A-REM",
-      "fisico": 1,
+      "codigo": "W2023A-REM",
+      "fisico": 4,
       "pendiente": 0,
       "entradaPendiente": 0,
       "entregado": 0,
-      "disponible": 1
+      "disponible": 4
+    },
+    {
+      "codigo": "W2022A-REM",
+      "fisico": 2,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 2
     },
     {
       "codigo": "W2300A-REM",
@@ -1010,11 +889,11 @@
     },
     {
       "codigo": "W1510A-REM",
-      "fisico": 8,
+      "fisico": 5,
       "pendiente": 0,
       "entradaPendiente": 0,
       "entregado": 0,
-      "disponible": 8
+      "disponible": 5
     },
     {
       "codigo": "CF230A-REM",
@@ -1023,6 +902,46 @@
       "entradaPendiente": 0,
       "entregado": 0,
       "disponible": 7
+    },
+    {
+      "codigo": "CE285A-REM",
+      "fisico": 3,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 3
+    },
+    {
+      "codigo": "CF500A-REM",
+      "fisico": 1,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 1
+    },
+    {
+      "codigo": "W2021A-REM",
+      "fisico": 0,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 0
+    },
+    {
+      "codigo": "CE390A-REM",
+      "fisico": 1,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 1
+    },
+    {
+      "codigo": "CF237A-REM",
+      "fisico": 9,
+      "pendiente": 0,
+      "entradaPendiente": 0,
+      "entregado": 0,
+      "disponible": 9
     }
   ]
 }
