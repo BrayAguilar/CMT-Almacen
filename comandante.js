@@ -1,14 +1,17 @@
 const C=window.AppCommon,$=s=>document.querySelector(s);
 let baseline,control;
 
+function normalizeCatalogAdditions(items){if(!Array.isArray(items))throw Error('La lista de modelos nuevos no es válida.');const base=new Set(baseline.catalog.map(p=>p.codigo.toLocaleUpperCase('es-MX'))),seen=new Set();return items.map(p=>{if(!p||typeof p!=='object'||Object.keys(p).some(k=>!['codigo','modelo','descripcion','tipo','origen','minimo','custom'].includes(k)))throw Error('El resumen incluye datos no permitidos en un modelo.');const codigo=String(p.codigo||'').trim().toLocaleUpperCase('es-MX'),modelo=String(p.modelo||'').trim(),descripcion=String(p.descripcion||modelo).trim(),tipo=String(p.tipo||'').trim(),minimo=Number(p.minimo)||0,key=codigo.toLocaleUpperCase('es-MX');if(!codigo||codigo.length>60||!modelo||modelo.length>180||descripcion.length>240||!['Tóner','Tinta','Polvo','Cartucho remanufacturado','Insumo'].includes(tipo)||!Number.isInteger(minimo)||minimo<0||base.has(key)||seen.has(key))throw Error('Hay un modelo nuevo inválido o repetido en el resumen.');seen.add(key);return {codigo,modelo,descripcion,tipo,origen:String(p.origen||''),minimo,custom:true}})}
+function currentCatalog(){return [...baseline.catalog,...(control?.catalogAdditions||[])]}
+function currentOpening(){return [...baseline.opening,...(control?.catalogAdditions||[]).map(p=>({codigo:p.codigo,cantidad:0}))]}
 async function init(){
   baseline=C.fresh();
   control=await C.read('commander');
-  if(control?.format!=='almacen-comandante-resumen'||control.baseVersion!==C.BASE_VERSION)control={format:'almacen-comandante-resumen',baseVersion:C.BASE_VERSION,records:[],inventory:[],snapshotId:null,sequence:0,importedAt:null,createdAt:null};
-  control.records=control.records||[];control.inventory=control.inventory||[];
+  if(control?.format!=='almacen-comandante-resumen'||control.baseVersion!==C.BASE_VERSION)control={format:'almacen-comandante-resumen',baseVersion:C.BASE_VERSION,catalogAdditions:[],records:[],inventory:[],snapshotId:null,sequence:0,importedAt:null,createdAt:null};
+  control.records=control.records||[];control.inventory=control.inventory||[];control.catalogAdditions=normalizeCatalogAdditions(control.catalogAdditions||[]);
   if(!control.inventory.length&&!control.snapshotId){
-    const opening=new Map(baseline.opening.map(x=>[x.codigo,Number(x.cantidad)||0]));
-    control.inventory=baseline.catalog.map(p=>{const quantity=opening.get(p.codigo)||0;return {codigo:p.codigo,fisico:quantity,pendiente:0,entradaPendiente:0,entregado:0,disponible:quantity}});
+    const opening=new Map(currentOpening().map(x=>[x.codigo,Number(x.cantidad)||0]));
+    control.inventory=currentCatalog().map(p=>{const quantity=opening.get(p.codigo)||0;return {codigo:p.codigo,fisico:quantity,pendiente:0,entradaPendiente:0,entregado:0,disponible:quantity}});
   }
   await C.write('commander',control);
   await syncPublishedUpdate();
@@ -25,11 +28,11 @@ async function init(){
 function validatePacket(p){
   const only=(obj,allowed)=>{if(Object.keys(obj).some(k=>!allowed.includes(k)))throw Error('El paquete contiene campos adicionales; no se cargó por seguridad.')};
   if(!p||typeof p!=='object')throw Error('El archivo no es un resumen depurado para Comandante.');
-  only(p,['format','version','baseVersion','snapshotId','sequence','createdAt','records','inventory']);
+  only(p,['format','version','baseVersion','snapshotId','sequence','createdAt','records','inventory','catalogAdditions']);
   if(p.format!=='almacen-comandante-resumen'||p.version!==1||!Array.isArray(p.records)||!Array.isArray(p.inventory)||!p.snapshotId)throw Error('El archivo no es un resumen depurado para Comandante.');
   if(p.baseVersion!==C.BASE_VERSION)throw Error('Este archivo usa otra versión del inventario base. Solicita el resumen correcto.');
   if(!Number.isInteger(Number(p.sequence))||Number(p.sequence)<1||!Number.isFinite(Date.parse(p.createdAt||'')))throw Error('El archivo no tiene una versión o fecha válida.');
-  const codes=new Set(baseline.catalog.map(x=>x.codigo)),inventoryCodes=new Set();
+  const additions=normalizeCatalogAdditions(p.catalogAdditions||[]),codes=new Set([...baseline.catalog,...additions].map(x=>x.codigo)),inventoryCodes=new Set();
   for(const x of p.records){
     only(x,['tipo','estado','fecha','organismo','codigo','cantidad']);
     if(!codes.has(String(x.codigo))||!['Entrada','Salida'].includes(x.tipo)||!/^\d{4}-\d{2}-\d{2}$/.test(x.fecha)||!Number.isInteger(Number(x.cantidad))||Number(x.cantidad)<=0)throw Error('Hay un resumen con datos incompletos o un consumible desconocido.');
@@ -65,7 +68,7 @@ async function syncPublishedUpdate(){
       catch(error){console.warn(`Se omitió ${file.name}:`,error);}
     }
     if(!latest||latest.snapshotId===control.snapshotId||!isPacketNewer(latest,control))return;
-    control={format:latest.format,baseVersion:C.BASE_VERSION,records:latest.records,inventory:latest.inventory,snapshotId:latest.snapshotId,sequence:Number(latest.sequence),importedAt:new Date().toISOString(),createdAt:latest.createdAt||null,source:'publicado'};
+    control={format:latest.format,baseVersion:C.BASE_VERSION,catalogAdditions:normalizeCatalogAdditions(latest.catalogAdditions||[]),records:latest.records,inventory:latest.inventory,snapshotId:latest.snapshotId,sequence:Number(latest.sequence),importedAt:new Date().toISOString(),createdAt:latest.createdAt||null,source:'publicado'};
     await C.write('commander',control);
   }catch(error){console.warn('No se pudo sincronizar la actualización publicada:',error);}
 }
@@ -74,9 +77,9 @@ function events(){return control.records||[];}
 function stockMap(){
   if(Array.isArray(control.inventory)){
     const snapshot=new Map(control.inventory.map(x=>[x.codigo,x]));
-    return new Map(baseline.catalog.map(p=>{const x=snapshot.get(p.codigo)||{};return [p.codigo,{fisico:Number(x.fisico)||0,pendiente:Number(x.pendiente)||0,entradaPendiente:Number(x.entradaPendiente)||0,entregado:Number(x.entregado)||0,disponible:Number(x.disponible)||0}]}));
+    return new Map(currentCatalog().map(p=>{const x=snapshot.get(p.codigo)||{};return [p.codigo,{fisico:Number(x.fisico)||0,pendiente:Number(x.pendiente)||0,entradaPendiente:Number(x.entradaPendiente)||0,entregado:Number(x.entregado)||0,disponible:Number(x.disponible)||0}]}));
   }
-  return C.stock(baseline.catalog,baseline.opening,events());
+  return C.stock(currentCatalog(),currentOpening(),events());
 }
 function render(){
   const stock=stockMap();
@@ -85,7 +88,7 @@ function render(){
   const pendingIn=[...stock.values()].reduce((n,x)=>n+x.entradaPendiente,0);
   const available=[...stock.values()].reduce((n,x)=>n+x.disponible,0);
   const delivered=events().filter(x=>x.tipo==='Salida'&&x.estado==='Recibido').reduce((n,x)=>n+Number(x.cantidad),0);
-  const low=baseline.catalog.filter(p=>C.lowState(p,stock.get(p.codigo)));
+  const low=currentCatalog().filter(p=>C.lowState(p,stock.get(p.codigo)));
   $('#available').textContent=C.fmt(available);$('#physical').textContent=C.fmt(physical);
   $('#pendingOut').textContent=C.fmt(pendingOut);$('#pendingIn').textContent=C.fmt(pendingIn);
   $('#lowCount').textContent=C.fmt(low.length);$('#delivered').textContent=C.fmt(delivered);
@@ -94,7 +97,7 @@ function render(){
     :'<b>Esperando la primera actualización.</b> Los movimientos se sincronizan automáticamente desde el repositorio al abrir esta aplicación.';
   const recent=events().filter(x=>(x.tipo==='Entrada'&&x.estado==='Entregada')||(x.tipo==='Salida'&&x.estado==='Recibido')).sort((a,b)=>C.eventDate(b).localeCompare(C.eventDate(a))).slice(0,10);
   $('#latest').innerHTML=recent.length?C.table(['Fecha','Movimiento','Unidad','Consumible','Cantidad'],recent.map(x=>[
-    C.esc(C.eventDate(x)),x.tipo==='Entrada'?'Entrada recibida':'Salida entregada',C.esc(x.organismo),C.esc(baseline.catalog.find(p=>p.codigo===x.codigo)?.modelo||x.codigo),C.fmt(x.cantidad)
+    C.esc(C.eventDate(x)),x.tipo==='Entrada'?'Entrada recibida':'Salida entregada',C.esc(x.organismo),C.esc(currentCatalog().find(p=>p.codigo===x.codigo)?.modelo||x.codigo),C.fmt(x.cantidad)
   ])):'<div class="empty">Todavía no hay movimientos confirmados.</div>';
   renderInventory();renderStats();
 }
@@ -102,7 +105,7 @@ function render(){
 function renderInventory(){
   if(!baseline||!control)return;
   const stock=stockMap(),q=$('#invSearch').value.trim().toLowerCase();
-  const products=baseline.catalog.filter(p=>[p.codigo,p.modelo,p.descripcion,p.tipo].join(' ').toLowerCase().includes(q));
+  const products=currentCatalog().filter(p=>[p.codigo,p.modelo,p.descripcion,p.tipo].join(' ').toLowerCase().includes(q));
   $('#inventoryTable').innerHTML=C.table(['Código','Consumible','Existencia física','Entradas recibidas','Salidas entregadas','Apartado pendiente','Disponible'],products.map(p=>{
     const b=stock.get(p.codigo);
     const incoming=events().filter(x=>x.codigo===p.codigo&&x.tipo==='Entrada'&&x.estado==='Entregada').reduce((n,x)=>n+Number(x.cantidad),0);
@@ -122,7 +125,7 @@ function renderStats(){
   const units=[...new Set(events().map(x=>x.organismo).filter(Boolean))].sort(),unit=$('#unitFilter'),oldUnit=unit.value;
   unit.innerHTML='<option value="">Todas</option>'+units.map(x=>`<option value="${C.esc(x)}">${C.esc(x)}</option>`).join('');if(units.includes(oldUnit))unit.value=oldUnit;
   const product=$('#productFilter'),oldProduct=product.value;
-  product.innerHTML='<option value="">Todos</option>'+baseline.catalog.map(x=>`<option value="${C.esc(x.codigo)}">${C.esc(x.modelo||x.descripcion)}</option>`).join('');if(baseline.catalog.some(x=>x.codigo===oldProduct))product.value=oldProduct;
+  product.innerHTML='<option value="">Todos</option>'+currentCatalog().map(x=>`<option value="${C.esc(x.codigo)}">${C.esc(x.modelo||x.descripcion)}</option>`).join('');if(currentCatalog().some(x=>x.codigo===oldProduct))product.value=oldProduct;
   const kind=$('#groupBy').value,chosen=selectedEvents(),buckets=new Map(),byUnit=new Map(),byProduct=new Map();let inTotal=0,outTotal=0;
   for(const x of chosen){
     const isIn=x.tipo==='Entrada'&&x.estado==='Entregada',isOut=x.tipo==='Salida'&&x.estado==='Recibido';if(!isIn&&!isOut)continue;
@@ -134,7 +137,7 @@ function renderStats(){
   $('#statsSummary').innerHTML=`<p class="notice">Con los filtros elegidos: <b>${C.fmt(outTotal)}</b> unidades entregadas (consumo) y <b>${C.fmt(inTotal)}</b> unidades recibidas por el almacén.</p>`;
   $('#statsChart').innerHTML=barChart([...buckets].sort((a,b)=>a[0].localeCompare(b[0])),kind);
   $('#byUnit').innerHTML=C.table(['Unidad','Unidades entregadas'],[...byUnit].sort((a,b)=>b[1]-a[1]).map(([k,v])=>[C.esc(k),C.fmt(v)]));
-  $('#byProduct').innerHTML=C.table(['Consumible','Unidades entregadas'],[...byProduct].sort((a,b)=>b[1]-a[1]).map(([k,v])=>[C.esc(baseline.catalog.find(p=>p.codigo===k)?.modelo||k),C.fmt(v)]));
+  $('#byProduct').innerHTML=C.table(['Consumible','Unidades entregadas'],[...byProduct].sort((a,b)=>b[1]-a[1]).map(([k,v])=>[C.esc(currentCatalog().find(p=>p.codigo===k)?.modelo||k),C.fmt(v)]));
 }
 function addTotal(map,key,value){map.set(key,(map.get(key)||0)+value);}
 function barChart(data,kind){

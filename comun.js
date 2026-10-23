@@ -1,5 +1,5 @@
 window.AppCommon=(()=>{
-const DB=window.APP_DB_NAME||'almacen-split-v1',LEGACY_DB='almacen-split-v1',BASE_VERSION='Existencias_2026-10-22_v2_gen';
+const DB=window.APP_DB_NAME||'almacen-split-v1',LEGACY_DB='almacen-split-v1',BASE_VERSION='Existencias_2026-10-23_v1_excel';
 function openNamed(name){return new Promise((ok,no)=>{const r=indexedDB.open(name,1);r.onupgradeneeded=()=>r.result.createObjectStore('data');r.onsuccess=()=>ok(r.result);r.onerror=()=>no(r.error)})}
 function open(){return openNamed(DB)}
 async function readNamed(name,key){const db=await openNamed(name),value=await new Promise((ok,no)=>{const r=db.transaction('data').objectStore('data').get(key);r.onsuccess=()=>ok(r.result);r.onerror=()=>no(r.error)});db.close();return value}
