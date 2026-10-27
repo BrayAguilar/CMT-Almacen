@@ -2,3 +2,5 @@
 .item-state{min-width:150px;padding:7px}.save-item-state{white-space:nowrap}
 .exit-item-row{grid-template-columns:minmax(220px,2fr) 100px minmax(140px,1fr) 150px auto}.exit-item-row .exit-item-status{width:100%}
 .stock-alert summary{cursor:pointer}.stock-alert ul{margin:10px 0 0;padding-left:24px;columns:2}.stock-alert li{padding:2px 0;break-inside:avoid}@media(max-width:560px){.stock-alert ul{columns:1}}
+
+.search-count{color:var(--muted);font-size:12px;white-space:nowrap}.product-search-hint{color:var(--muted);font-size:12px;min-height:1em}

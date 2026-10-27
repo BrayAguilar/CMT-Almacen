@@ -1,6 +1,7 @@
 const C=window.AppCommon,$=s=>document.querySelector(s);
 let baseline,control;
 
+function searchNormalize(value){return String(value||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLocaleLowerCase('es-MX').replace(/[^a-z0-9]+/g,' ').trim()}function matchesSearch(values,query){const q=searchNormalize(query);if(!q)return true;const hay=searchNormalize(values.join(' ')),terms=q.split(' ').filter(Boolean);return terms.every(term=>hay.includes(term))||hay.replaceAll(' ','').includes(q.replaceAll(' ',''))}
 function normalizeCatalogAdditions(items){if(!Array.isArray(items))throw Error('La lista de modelos nuevos no es válida.');const base=new Set(baseline.catalog.map(p=>p.codigo.toLocaleUpperCase('es-MX'))),seen=new Set();return items.map(p=>{if(!p||typeof p!=='object'||Object.keys(p).some(k=>!['codigo','modelo','descripcion','tipo','origen','minimo','custom'].includes(k)))throw Error('El resumen incluye datos no permitidos en un modelo.');const codigo=String(p.codigo||'').trim().toLocaleUpperCase('es-MX'),modelo=String(p.modelo||'').trim(),descripcion=String(p.descripcion||modelo).trim(),tipo=String(p.tipo||'').trim(),minimo=Number(p.minimo)||0,key=codigo.toLocaleUpperCase('es-MX');if(!codigo||codigo.length>60||!modelo||modelo.length>180||descripcion.length>240||!['Tóner','Tinta','Polvo','Cartucho remanufacturado','Insumo'].includes(tipo)||!Number.isInteger(minimo)||minimo<0||base.has(key)||seen.has(key))throw Error('Hay un modelo nuevo inválido o repetido en el resumen.');seen.add(key);return {codigo,modelo,descripcion,tipo,origen:String(p.origen||''),minimo,custom:true}})}
 function currentCatalog(){return [...baseline.catalog,...(control?.catalogAdditions||[])]}
 function currentOpening(){return [...baseline.opening,...(control?.catalogAdditions||[]).map(p=>({codigo:p.codigo,cantidad:0}))]}
@@ -106,13 +107,14 @@ function rubricOf(p){const norm=s=>String(s||'').normalize('NFD').replace(/[\u03
 function renderCategorySummary(catalog,balances,events){const labels=['Tóner genérico','Tóner original','Tóner remanufacturado','Tóner sin clasificar','Tinta genérica','Tinta original','Tinta sin clasificar','Polvos','Otros insumos'],groups=new Map(labels.map(k=>[k,{models:0,available:0,entries:0,exits:0}])),byCode=new Map(catalog.map(p=>[p.codigo,p]));for(const p of catalog){const g=groups.get(rubricOf(p)),b=balances.get(p.codigo)||{};g.models++;g.available+=Number(b.disponible)||0}for(const e of events||[]){const p=byCode.get(e.codigo);if(!p)continue;const g=groups.get(rubricOf(p)),q=Number(e.cantidad)||0;if(e.tipo==='Entrada'&&e.estado==='Entregada')g.entries+=q;if(e.tipo==='Salida'&&e.estado==='Recibido')g.exits+=q}const rows=[...groups].map(([name,g])=>[name,C.fmt(g.models),C.fmt(g.available),C.fmt(g.entries),C.fmt(g.exits)]),total=[...groups.values()].reduce((a,g)=>({models:a.models+g.models,available:a.available+g.available,entries:a.entries+g.entries,exits:a.exits+g.exits}),{models:0,available:0,entries:0,exits:0});rows.push(['TOTAL',C.fmt(total.models),C.fmt(total.available),C.fmt(total.entries),C.fmt(total.exits)]);const host=document.querySelector('#categorySummary');if(host)host.innerHTML=C.table(['Rubro','Modelos','Disponible actual','Entradas entregadas','Salidas recibidas'],rows)}
 function renderInventory(){
   if(!baseline||!control)return;
-  const stock=stockMap();renderCategorySummary(currentCatalog(),stock,events());const q=$('#invSearch').value.trim().toLowerCase();
-  const products=currentCatalog().filter(p=>[p.codigo,p.modelo,p.descripcion,p.tipo].join(' ').toLowerCase().includes(q));
-  $('#inventoryTable').innerHTML=C.table(['Código','Consumible','Existencia física','Entradas recibidas','Salidas entregadas','Apartado pendiente','Disponible'],products.map(p=>{
+  const stock=stockMap(),query=$('#invSearch').value,products=currentCatalog().filter(p=>matchesSearch([p.codigo,p.modelo,p.descripcion,p.tipo,p.origen],query));
+  renderCategorySummary(currentCatalog(),stock,events());
+  $('#inventoryCount').textContent=`${C.fmt(products.length)} de ${C.fmt(currentCatalog().length)} modelos`;
+  $('#inventoryTable').innerHTML=products.length?C.table(['Código','Consumible','Existencia física','Entradas recibidas','Salidas entregadas','Apartado pendiente','Disponible'],products.map(p=>{
     const b=stock.get(p.codigo);
     const incoming=events().filter(x=>x.codigo===p.codigo&&x.tipo==='Entrada'&&x.estado==='Entregada').reduce((n,x)=>n+Number(x.cantidad),0);
     return [C.esc(p.codigo),C.esc(p.modelo||p.descripcion),C.fmt(b.fisico),C.fmt(incoming),C.fmt(b.entregado),C.fmt(b.pendiente),`<b class="${C.lowState(p,b)?'low':''}">${C.fmt(b.disponible)}</b>`];
-  }));
+  })):'<div class="empty">No hay modelos que coincidan. Prueba otro código o descripción.</div>';
 }
 
 function monday(date){const d=new Date(date+'T00:00:00');d.setDate(d.getDate()-((d.getDay()+6)%7));return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;}

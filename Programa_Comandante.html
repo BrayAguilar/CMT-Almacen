@@ -34,7 +34,7 @@
     </section>
 
     <section id="inventario" class="panel">
-      <div class="toolbar"><input id="invSearch" type="search" placeholder="Escribe código, modelo o consumible para buscar"></div>
+      <div class="toolbar"><input id="invSearch" type="search" aria-label="Buscar en inventario" placeholder="Busca por código, modelo, descripción o tipo"><span id="inventoryCount" class="search-count" aria-live="polite"></span></div>
       <p class="notice">El disponible es lo que se puede entregar ahora. Las salidas pendientes ya están apartadas.</p>
       <div class="box"><h2>Existencias por rubro</h2><p class="muted">Conteo de modelos, unidades disponibles y movimientos confirmados acumulados.</p><div id="categorySummary"></div></div>
       <div id="inventoryTable"></div>
