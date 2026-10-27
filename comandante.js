@@ -15,14 +15,14 @@ async function init(){
     control.inventory=currentCatalog().map(p=>{const quantity=opening.get(p.codigo)||0;return {codigo:p.codigo,fisico:quantity,pendiente:0,entradaPendiente:0,entregado:0,disponible:quantity}});
   }
   await C.write('commander',control);
-  await syncPublishedUpdate();
   document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{
     document.querySelectorAll('.tabs button,.panel').forEach(x=>x.classList.remove('active'));
-    b.classList.add('active');$('#'+b.dataset.tab).classList.add('active');
+    b.classList.add('active');const panel=$('#'+b.dataset.tab);if(panel)panel.classList.add('active');
   });
   $('#groupBy').onchange=renderStats;$('#range').onchange=renderStats;
   $('#unitFilter').onchange=renderStats;$('#productFilter').onchange=renderStats;
   $('#invSearch').oninput=renderInventory;
+  await syncPublishedUpdate();
   render();
 }
 
@@ -153,5 +153,5 @@ function barChart(data,kind){
   s+=`<rect x="${W/2-130}" y="${H-22}" width="11" height="11" fill="#12b76a"/><text x="${W/2-114}" y="${H-12}" font-size="11" fill="#475569">Entradas recibidas</text><rect x="${W/2+20}" y="${H-22}" width="11" height="11" fill="#155eef"/><text x="${W/2+36}" y="${H-12}" font-size="11" fill="#475569">Entregadas</text></svg></div>`;return s;
 }
 
-init();
+init().catch(error=>{console.error('No se pudo iniciar Comandante',error);const notice=document.createElement('div');notice.className='alert';notice.textContent='No se pudo iniciar el programa: '+(error?.message||error);document.querySelector('main')?.prepend(notice)});
 
